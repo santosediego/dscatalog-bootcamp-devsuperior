@@ -40,6 +40,13 @@ public class CategoryService {
 		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		return new CategoryDTO(entity);
 	}
+
+	public CategoryDTO insert(CategoryDTO dto) {
+		Category entity = new Category();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
+		return new CategoryDTO(entity);
+	}
 }
 //@Transactional para garantir a integridade das transações;
 //(readOnly = true) evita que faça lokin no bd, likin trava o bd, é sempre é bom colocar isso 
