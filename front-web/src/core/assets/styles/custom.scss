@@ -1,0 +1,10 @@
+// Aquivo para configurar os estilos do bootstrap
+// Por padrão no diretório src/core/assets/styles
+$theme-colors: (// variavel do sass;
+    "primary": #407BFF // primary do bootstrap;
+);
+
+$body-bg: #E5E5E5; // cor para o background;
+$body-color: #263238; // cor do texto do projeto;
+
+@import '~bootstrap/scss/bootstrap.scss';
