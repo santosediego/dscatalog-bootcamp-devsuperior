@@ -63,6 +63,6 @@ export const isAllowedByRole = (routeRoles: Role[] = []) => {
 
     const { authorities } = getAccessTokenDecoded();
 
-    // Existe ao menos uma role com permissão?
+    // Existe ao menos uma role nesse usuário compativel com as do sistema?
     return routeRoles.some(role => authorities.includes(role));
 }
