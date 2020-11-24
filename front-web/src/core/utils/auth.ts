@@ -37,8 +37,12 @@ export const getSessionData = () => {
 export const getAccessTokenDecoded = () => {
     const sessionData = getSessionData();
 
-    const tokenDecoded = jwtDecode(sessionData.access_token);
-    return tokenDecoded as AccessToken;
+    try {
+        const tokenDecoded = jwtDecode(sessionData.access_token);
+        return tokenDecoded as AccessToken;
+    } catch (error){
+        return {} as AccessToken;
+    }
 }
 
 // Verifica se  chave não está expirada;
@@ -64,5 +68,5 @@ export const isAllowedByRole = (routeRoles: Role[] = []) => {
     const { authorities } = getAccessTokenDecoded();
 
     // Existe ao menos uma role nesse usuário compativel com as do sistema?
-    return routeRoles.some(role => authorities.includes(role));
+    return routeRoles.some(role => authorities?.includes(role));
 }
