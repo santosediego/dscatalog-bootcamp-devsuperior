@@ -32,7 +32,7 @@ const Form = () => {
         event.preventDefault();
         const payLoad = {
             ...formData,
-            imgUrl:'https://www.kadri.com.br/imgsite/produtos/amp-29418_1.jpg',
+            imgUrl:'https://images.tcdn.com.br/img/img_prod/730679/produto_de_teste_95_1_20200210124955.png',
             categories: [{id: formData.category }]
         }
         
