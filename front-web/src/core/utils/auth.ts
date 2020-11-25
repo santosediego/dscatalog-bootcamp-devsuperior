@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import history from './history';
 
 export const CLIENT_ID = 'dscatalog';
 export const CLIENT_SECRET = 'dscatalog123';
@@ -69,4 +70,10 @@ export const isAllowedByRole = (routeRoles: Role[] = []) => {
 
     // Existe ao menos uma role nesse usuário compativel com as do sistema?
     return routeRoles.some(role => authorities?.includes(role));
+}
+
+// Faz o logout
+export const logout = () =>{
+    localStorage.removeItem("authData"); // Limpa a chave, se usado .clear() limpa tudo;
+    history.replace('/auth/login');
 }
