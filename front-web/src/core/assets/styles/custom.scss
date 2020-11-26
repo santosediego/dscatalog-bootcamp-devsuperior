@@ -1,7 +1,8 @@
 // Aquivo para configurar os estilos do bootstrap
 // Por padrão no diretório src/core/assets/styles
 $theme-colors: (// variavel do sass;
-    "primary": #407BFF // primary do bootstrap;
+    "primary": #407BFF, // primary do bootstrap;
+    "secondary": #E1E1E1
 );
 
 $body-bg: #F2F2F2; // cor para o background;
