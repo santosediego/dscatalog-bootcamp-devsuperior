@@ -5,11 +5,12 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Card from '../Card';
 import { toast } from 'react-toastify';
+import CardLoader from '../Loaders/ProductCardLoader';
 
 const List = () => {
 
     const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
-    //const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [activePage, setActivePage] = useState(0);
     const history = useHistory();
 
@@ -22,12 +23,12 @@ const List = () => {
         }
 
         // Inicia o loader;
-        //setIsLoading(true);
+        setIsLoading(true);
         makeRequest({ url: '/products', params })
             .then(response => setProductsResponse(response.data))
             .finally(() => {
                 // Finaliza o loader;
-                //setIsLoading(false);
+                setIsLoading(false);
             })
     }, [activePage]);
 
@@ -59,9 +60,11 @@ const List = () => {
                 ADICIONAR
             </button>
             <div className="admin-list-container">
-                {productsResponse?.content.map(product => (
-                    <Card product={product} key={product.id} onRemove={onRemove} />
-                ))}
+                {isLoading ? <CardLoader /> : (
+                    productsResponse?.content.map(product => (
+                        <Card product={product} key={product.id} onRemove={onRemove} />
+                    ))
+                )}
                 {productsResponse && (
                     <Pagination
                         totalPages={productsResponse.totalPages}
