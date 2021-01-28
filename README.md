@@ -66,6 +66,6 @@ yarn install
 yarn start
 ```
 
-## Autor
+# Autor
 
-Diego Santos
+[Diego Santos](https://www.linkedin.com/in/santosediego/ "Perfil Linkedin Diego Santos")
