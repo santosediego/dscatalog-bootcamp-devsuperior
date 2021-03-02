@@ -1,5 +1,7 @@
 package com.santosediego.dscatalog.tests.repositories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import com.santosediego.dscatalog.entities.Category;
 import com.santosediego.dscatalog.entities.Product;
 import com.santosediego.dscatalog.repositories.ProductRepository;
 import com.santosediego.dscatalog.tests.factory.ProductFactory;
@@ -25,6 +28,7 @@ public class ProductRepositoryTests {
 	private long nonExistingId;
 	private long countTotalProducts;
 	private long countPCGamerProducts;
+	private long countCategory3Products;
 	private PageRequest pageRequest;
 
 	@BeforeEach
@@ -33,10 +37,30 @@ public class ProductRepositoryTests {
 		nonExistingId = 1000L;
 		countTotalProducts = 25L;
 		countPCGamerProducts = 21L;
+		countCategory3Products = 23L;
 		pageRequest = PageRequest.of(0, 10);
 	}
+	
+	@Test
+	public void findShouldReturnOnlySelectedCategoryWhenCategoryInformed() {
+		List<Category> categories = new ArrayList<>();
+		categories.add(new Category(3L, null));
+		
+		Page<Product> result = repository.find(categories, "", pageRequest);
+		
+		Assertions.assertFalse(result.isEmpty());
+		Assertions.assertEquals(countCategory3Products, result.getTotalElements());
+	}
 
-	// EXERCICIO PESQUISA POR CATEGORIA, FAZER DOIS TESTES UTILIZANDO CATEGORIA
+	@Test
+	public void findShouldReturnAllProductsWhenCategoryNotInformed() {
+		List<Category> categories = null;
+		
+		Page<Product> result = repository.find(categories, "", pageRequest);
+		
+		Assertions.assertFalse(result.isEmpty());
+		Assertions.assertEquals(countTotalProducts, result.getTotalElements());
+	}
 	
 	@Test
 	public void findShouldReturnNothingWhenNameDoesNotExist() {
