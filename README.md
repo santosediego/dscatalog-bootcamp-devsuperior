@@ -1,9 +1,10 @@
 # DS Catalog
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/santosediego/dscatalog-bootcamp-devsuperior/blob/main/LICENSE) 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/705c749c-fb0d-493b-a914-8fbffb7b5daf/deploy-status)](https://app.netlify.com/sites/dscatalogdiegosantos/deploys)
 
 # Sobre o projeto
 
-DS Catalog é uma aplicação full stack web que está sendo desenvolvida no decorrer do Bootcamp da [DevSuperior](https://devsuperior.com "Site da DevSuperior").
+[DS Catalog](https://dscatalogdiegosantos.netlify.app "Site do DSCatalog") é uma aplicação full stack web que está sendo desenvolvida no decorrer do Bootcamp da [DevSuperior](https://devsuperior.com "Site da DevSuperior").
 
 A futura aplicação simula um catalogo de produtos categorizados e com upload de imagens, controle de acesso e usuários.
 
