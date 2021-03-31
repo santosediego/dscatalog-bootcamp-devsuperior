@@ -18,7 +18,8 @@ type LoginData = {
 
 // A url basica das requisições;
 // Por padrão o method é GET, caso for outra coisa deve ser alterado na chamada;
-const BASE_URL = 'http://192.168.100.5:8080';
+// process.env identifica o estado em que o sistema esta, em produção ou local e selecia a variavel afim;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
 
 axios.interceptors.response.use(function (response) {
     return response;
