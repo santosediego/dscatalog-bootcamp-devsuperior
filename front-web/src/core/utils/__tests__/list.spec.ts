@@ -13,12 +13,7 @@ test('should generate a list', () => {
 });
 
 test('should generate an empty list when amount is zero', () => {
-    // ARRANGE - Preparação do ambiente;
     const amount = 0;
-
-    // ACT
     const result = generateList(amount);
-
-    // ASSERT
     expect(result).toEqual([]);
 });

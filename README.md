@@ -61,10 +61,10 @@ git clone https://github.com/santosediego/dscatalog-bootcamp-devsuperior.git
 cd front-web
 
 # instalar dependências
-npm install
+yarn install
 
 # executar o projeto
-npm start
+yarn start
 ```
 
 # Autor
