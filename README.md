@@ -32,6 +32,7 @@ A futura aplicação simula um catalogo de produtos categorizados e com upload d
 - Apex Charts
 ## Implantação em produção
 - Back end: Heroku
+- Front end web: Netlify
 - Banco de dados: Postgresql
 
 # Como executar o projeto
