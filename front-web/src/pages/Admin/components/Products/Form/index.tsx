@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import BaseForm from '../../BaseForm';
 import Select from 'react-select';
 import { Category } from 'core/types/Product';
+import ImageUpload from '../ImageUpload';
 import './styles.scss';
 
 type FormState = {
@@ -26,6 +27,8 @@ const Form = () => {
     const { productId } = useParams<ParamsType>();
     const [isLoadingCategories, setIsLoadingCategories] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [uploadImgUrl, setUploadImgUrl] = useState('');
+    const [productImgUrl, setProductImgUrl] = useState('');
     const isEditing = productId !== "create"; // o isEditing é diferente de create?
     const formTitle = isEditing ? 'Editar um produto' : 'Cadastrar um produto';
 
@@ -36,8 +39,9 @@ const Form = () => {
                     setValue('name', response.data.name);
                     setValue('price', response.data.price);
                     setValue('description', response.data.description);
-                    setValue('imgUrl', response.data.imgUrl);
                     setValue('categories', response.data.categories);
+
+                    setProductImgUrl(response.data.imgUrl);
                 })
         }
     }, [productId, isEditing, setValue]);
@@ -50,10 +54,16 @@ const Form = () => {
     }, []);
 
     const onSubmit = (data: FormState) => {
+
+        const payload = {
+            ...data,
+            imgUrl: uploadImgUrl || productImgUrl
+        }
+
         makePrivateRequest({
             url: isEditing ? `/products/${productId}` : '/products',
             method: isEditing ? 'PUT' : 'POST',
-            data
+            data: payload
         })
             .then(() => {
                 toast.info('Produto salvo com sucesso!');
@@ -62,6 +72,10 @@ const Form = () => {
             .catch(() => {
                 toast.error('Erro ao salvar produto!');
             })
+    }
+
+    const onUploadSuccess = (imgUrl: string) => {
+        setUploadImgUrl(imgUrl)
     }
 
     return (
@@ -130,19 +144,10 @@ const Form = () => {
                         </div>
 
                         <div className="margin-botton-30">
-                            <input
-                                ref={register({ required: "Campo obrigatório", })}
-                                name="imgUrl"
-                                type="text"
-                                className="form-control input-base"
-                                placeholder="Imagem do produto"
-                                data-testid="imgUrl"
+                            <ImageUpload
+                                onUploadSuccess={onUploadSuccess}
+                                productImgUrl={productImgUrl}
                             />
-                            {errors.imgUrl && (
-                                <div className="invalid-feedback d-block">
-                                    {errors.imgUrl.message}
-                                </div>
-                            )}
                         </div>
 
                     </div>

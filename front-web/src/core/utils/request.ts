@@ -1,15 +1,6 @@
-import axios, { Method } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
-import { CLIENT_ID, CLIENT_SECRET, getSessionData, logout} from './auth';
-
-//Criamos um tipo para o method, os registros para a url;
-type RequestParams = {
-    method?: Method;
-    url: string; // url vinda da chamda;
-    data?: object | string; // Dados que serão enviados ao backend; (Cadastro, post, update); object ou string
-    params?: object;
-    headers?: object;
-}
+import { CLIENT_ID, CLIENT_SECRET, getSessionData, logout } from './auth';
 
 type LoginData = {
     username: string;
@@ -23,31 +14,28 @@ const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
 
 axios.interceptors.response.use(function (response) {
     return response;
-  }, function (error) {
-    if(error.response.status === 401){
+}, function (error) {
+    if (error.response.status === 401) {
         logout();
     }
     return Promise.reject(error);
-  });
+});
 
-export const makeRequest = ({ method = 'GET', url, data, params, headers }: RequestParams) => {
-    return axios ({
-        method,
-        url: `${BASE_URL}${url}`,
-        data,
-        params,
-        headers
+export const makeRequest = (params: AxiosRequestConfig) => {
+    return axios({
+        ...params,
+        baseURL: BASE_URL
     });
 }
 
-export const makePrivateRequest = ({  method = 'GET', url, data, params }: RequestParams) => {
+export const makePrivateRequest = (params: AxiosRequestConfig) => {
     const sessionData = getSessionData();
 
     const headers = {
         'Authorization': `Bearer ${sessionData.access_token}`
     }
 
-    return makeRequest({ method, url, data, params, headers })
+    return makeRequest({ ...params, headers })
 }
 
 export const makeLogin = (loginData: LoginData) => {
@@ -58,7 +46,7 @@ export const makeLogin = (loginData: LoginData) => {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 
-    const payload = qs.stringify({ ...loginData, grant_type: 'password'});
+    const payload = qs.stringify({ ...loginData, grant_type: 'password' });
 
     //Como fazer o payload na mão:
     //const payload = `username=${loginData.username}&password=${loginData.password}&grant_type=password`
