@@ -47,7 +47,7 @@ const ProductFilters = ({ name, handleChangeName, category, handleChangeCategory
                 getOptionValue={(option: Category) => String(option.id)}
                 className="filter-select-container"
                 classNamePrefix="product-categories-select"
-                placeholder="Filtrar por Categoria"
+                placeholder="Categoria"
                 inputId="categories"
                 onChange={value => handleChangeCategory(value as Category)}
                 isClearable
