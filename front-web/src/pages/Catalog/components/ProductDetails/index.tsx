@@ -36,23 +36,23 @@ const ProductDetails = () => {
                     <ArrowIcon className="icon-goback" />
                     <h1 className="text-goback">Voltar</h1>
                 </Link>
-                <div className="product-details-info">
+                <div className="row product-details-info">
                     {isLoading ? <ProductInfoLoader /> : (
-                        <>
-                            <div className="product-details-card text-center">
+                            <div className="col-xl-6">
+                                <div className="product-details-card text-center">
 
-                                <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
+                                    <img src={product?.imgUrl} alt={product?.name} className="product-details-image" />
+                                </div>
+                                <div className="product-info-fields">
+                                    <h1 className="product-details-name">
+                                        {product?.name}
+                                    </h1>
+                                    {product?.price && <ProductPrice price={product?.price} />}
+                                </div>
                             </div>
-                            <div className="product-info-fields">
-                                <h1 className="product-details-name">
-                                    {product?.name}
-                                </h1>
-                                {product?.price && <ProductPrice price={product?.price} />}
-                            </div>
-                        </>
                     )}
 
-                    <div className="product-details-card">
+                    <div className="product-details-card col-xl-6">
                         {isLoading ? <ProductDescriptionLoader /> : (
                             <>
                                 <h1 className="product-description-title">Descrição do produto</h1>
