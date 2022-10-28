@@ -17,9 +17,8 @@ const List = () => {
     const getProducts = useCallback(() => { //vai explicar sobre o useCallabck
         const params = {
             page: activePage,
-            linesPerPage: 4,
-            direction: 'DESC',
-            orderBy: 'id'
+            size: 4,
+            sort: 'id,DESC'
         }
 
         // Inicia o loader;

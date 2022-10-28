@@ -20,7 +20,7 @@ const Catalog = () => {
 
         const params = {
             page: activePage,
-            linesPerPage: 12,
+            size: 12,
             name,
             categoryId: category?.id
         }
