@@ -31,6 +31,7 @@ public class ProductRepositoryTests {
 	private long countCategory3Products;
 	private PageRequest pageRequest;
 
+	//Fixtures
 	@BeforeEach
 	void setup() throws Exception {
 		existingId = 1L;
@@ -102,7 +103,7 @@ public class ProductRepositoryTests {
 	}
 
 	@Test
-	public void sveShouldPersistWithAutoicrementWhenIsNull() {
+	public void saveShouldPersistWithAutoicrementWhenIsNull() {
 
 		Product product = ProductFactory.createProduct();
 		product.setId(null);
@@ -114,6 +115,22 @@ public class ProductRepositoryTests {
 		Assertions.assertEquals(countTotalProducts + 1L, product.getId());
 		Assertions.assertTrue(result.isPresent());
 		Assertions.assertSame(result.get(), product);
+	}
+
+	@Test
+	public void findbyidShouldReturnOptionalNotEmptyWhenIdExists() {
+		
+		Optional<Product> result = repository.findById(existingId);
+
+		Assertions.assertTrue(result.isPresent());
+	}
+
+	@Test
+	public void findbyidShouldReturnOptionalNotEmptyWhenIdNotExist() {
+		
+		Optional<Product> result = repository.findById(nonExistingId);
+
+		Assertions.assertTrue(result.isEmpty());
 	}
 
 	@Test // Para realizar o teste daquela função;
