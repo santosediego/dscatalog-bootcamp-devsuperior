@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from 'components/Navbar';
-import Catalog from 'assets/pages/Catalog';
+import Catalog from 'pages/Catalog';
 import './assets/styles/custom.scss';
 import './App.css';
 
