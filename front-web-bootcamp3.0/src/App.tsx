@@ -2,12 +2,13 @@ import React from 'react';
 import './assets/styles/custom.scss';
 import './App.css';
 import Navbar from 'components/Navbar';
+import Home from 'assets/pages/Home';
 
 function App() {
   return (
     <>
       <Navbar />
-      <h1>Hello DSCatalog</h1>
+      <Home />
     </>
   );
 }
