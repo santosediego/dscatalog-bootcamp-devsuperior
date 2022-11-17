@@ -1,15 +1,11 @@
 import React from 'react';
-import Navbar from 'components/Navbar';
-import Catalog from 'pages/Catalog';
+import Routes from 'Routes';
 import './assets/styles/custom.scss';
 import './App.css';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Catalog />
-    </>
+    <Routes />
   );
 }
 
