@@ -1,11 +1,15 @@
 import React from 'react';
 import './styles.css';
 
-const ProducPrice = () => {
+type Props = {
+    price: number;
+}
+
+const ProducPrice = ({ price }: Props) => {
     return (
         <div className='product-price-container'>
             <span>R$</span>
-            <h3>2.260,23</h3>
+            <h3>{price}</h3>
         </div>
     );
 }
