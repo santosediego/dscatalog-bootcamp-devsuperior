@@ -1,8 +1,15 @@
 import React from 'react';
+import Navbar from './Navbar';
+import './styles.css';
 
 const Admin = () => {
-    return(
-        <div>Página administrativa - Em desenvolvimento</div>
+    return (
+        <div className="admin-container">
+            <Navbar />
+            <div className="admin-content">
+                <p>content</p>
+            </div>
+        </div>
     );
 }
 
