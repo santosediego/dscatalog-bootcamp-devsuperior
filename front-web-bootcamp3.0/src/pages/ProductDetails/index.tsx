@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProducPrice from 'components/ProductPrice';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { Product } from 'types/product';
+import { BASE_URL } from 'util/requests';
 import './styles.css';
 
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 
+type UrlParams = {
+    productId: string;
+}
+
 const ProductDetails = () => {
+
+    const { productId } = useParams<UrlParams>();
+
+    const [product, setProduct] = useState<Product>();
+
+    useEffect(() => {
+        axios.get(`${BASE_URL}/products/${productId}`)
+            .then(response => {
+                setProduct(response.data)
+            }).catch(() => {
+                console.log('Error')
+            })
+    }, [productId]);
+
     return (
         <div className="product-details-container">
             <div className="base-card product-details-card">
@@ -18,17 +39,17 @@ const ProductDetails = () => {
                 <div className="row">
                     <div className='col-xl-6'>
                         <div className="img-container">
-                            <img src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/4-big.jpg" alt="Nome do produto" />
+                            <img src={product?.imgUrl} alt={product?.name} />
                         </div>
                         <div className="name-price-container">
-                            <h1>Nome do produto</h1>
-                            <ProducPrice price={1200} />
+                            <h1>{product?.name}</h1>
+                            {product && <ProducPrice price={product?.price} />}
                         </div>
                     </div>
                     <div className="col-xl-6">
                         <div className="description-container">
                             <h2>Descrição do produto</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nihil aliquam consequuntur ducimus vero, sapiente laudantium modi magnam eaque eveniet adipisci soluta inventore officia odit obcaecati suscipit. Officia modi voluptas ullam, atque, ad eveniet vel quos deserunt, esse a quasi eius earum omnis? Nemo, itaque. Officiis praesentium reiciendis eius ducimus?</p>
+                            <p>{product?.description}</p>
                         </div>
                     </div>
                 </div>
