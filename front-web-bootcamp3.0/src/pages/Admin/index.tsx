@@ -1,7 +1,8 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import Users from './User';
+import PrivateRoute from 'components/PrivateRoute';
 import './styles.css';
 
 const Admin = () => {
@@ -10,15 +11,15 @@ const Admin = () => {
             <Navbar />
             <div className="admin-content">
                 <Switch>
-                    <Route path='/admin/products'>
+                    <PrivateRoute path='/admin/products'>
                         <p>CRUD de produtos - em desenvolvimento.</p>
-                    </Route>
-                    <Route path='/admin/categories'>
+                    </PrivateRoute>
+                    <PrivateRoute path='/admin/categories'>
                         <p>CRUD de categorias - em desenvolvimento.</p>
-                    </Route>
-                    <Route path='/admin/users'>
+                    </PrivateRoute>
+                    <PrivateRoute path='/admin/users'>
                         <Users />
-                    </Route>
+                    </PrivateRoute>
                     <Redirect from='*' to='/admin/products' exact />
                 </Switch>
             </div>
