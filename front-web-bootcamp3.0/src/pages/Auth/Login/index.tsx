@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
-import { requestBackendLogin } from 'util/requests';
+import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
 import './styles.css';
 
 type FormData = {
@@ -20,7 +20,10 @@ const Login = () => {
 
         requestBackendLogin(formData)
             .then(response => {
-                console.log('sucesso', response);
+                saveAuthData(response.data);
+
+                const token = getAuthData().access_token;
+                console.log(token);
             })
             .catch(error => {
                 setHasError(true);
