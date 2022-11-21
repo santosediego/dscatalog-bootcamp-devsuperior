@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import Navbar from 'components/Navbar';
 import Catalog from 'pages/Catalog';
 import Home from 'pages/Home';
 import Admin from 'pages/Admin';
 import ProductDetails from 'pages/ProductDetails';
 import Auth from 'pages/Auth';
+import history from 'util/history';
 
 const Routes = () => {
     return (
-        <BrowserRouter>
+        <Router history={history}>
             <Navbar />
             <Switch>
                 <Route path='/' exact>
@@ -31,7 +32,7 @@ const Routes = () => {
                 </Route>
                 <Redirect from='*' to='/' exact />
             </Switch>
-        </BrowserRouter>
+        </Router>
     );
 }
 
