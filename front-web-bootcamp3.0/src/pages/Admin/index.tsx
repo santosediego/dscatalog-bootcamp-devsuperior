@@ -17,7 +17,7 @@ const Admin = () => {
                     <PrivateRoute path='/admin/categories'>
                         <p>CRUD de categorias - em desenvolvimento.</p>
                     </PrivateRoute>
-                    <PrivateRoute path='/admin/users'>
+                    <PrivateRoute path='/admin/users' roles={['ROLE_ADMIN']}>
                         <Users />
                     </PrivateRoute>
                     <Redirect from='*' to='/admin/products' exact />
