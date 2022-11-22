@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
-import { requestBackendLogin, saveAuthData } from 'util/requests';
+import { getTokenData, requestBackendLogin, saveAuthData } from 'util/requests';
 import './styles.css';
+import { AuthContext } from 'AuthContext';
 
 type FormData = {
     username: string,
@@ -12,6 +13,7 @@ type FormData = {
 
 const Login = () => {
 
+    const { setAuthContextData } = useContext(AuthContext);
     const [hasError, setHasError] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const history = useHistory();
@@ -22,11 +24,14 @@ const Login = () => {
         requestBackendLogin(formData)
             .then(response => {
                 saveAuthData(response.data);
+                setAuthContextData({
+                    authenticated: true,
+                    tokenData: getTokenData()
+                })
                 history.push('/admin')
             })
             .catch(error => {
                 setHasError(true);
-                console.log('deu ruim', error);
             })
     }
 
