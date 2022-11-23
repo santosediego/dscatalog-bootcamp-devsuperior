@@ -20,6 +20,10 @@ const List = () => {
             {
                 "id": 2,
                 "name": "Fantasia"
+            },
+            {
+                "id": 3,
+                "name": "Ficção cientifics"
             }
         ]
     }

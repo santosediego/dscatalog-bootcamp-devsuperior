@@ -19,11 +19,15 @@ const ProductCrudCard = ({ product }: Props) => {
                     <h6>{product.name}</h6>
                     <ProducPrice price={product.price} />
                 </div>
-                <div className="product-crud-categories-container">
+                <div className='product-crud-categories-container'>
                     {product.categories.map(category => (
                         <CategoryBadge key={category.id} name={category.name} />
                     ))}
                 </div>
+            </div>
+            <div className='product-crud-card-buttons-container'>
+                <button className='btn btn-outline-danger product-crud-card-button'>EXCLUIR</button>
+                <button className='btn btn-outline-secondary product-crud-card-button'>EDITAR</button>
             </div>
         </div>
     );
