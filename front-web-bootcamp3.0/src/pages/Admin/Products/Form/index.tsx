@@ -6,24 +6,51 @@ const Form = () => {
         <div className='product-crud-bar-container'>
             <div className='base-card product-card-form-card'>
                 <h1 className='product-card-form-card-title'>Dados do produto</h1>
-                <form action="">
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <input type="text" className='form-control base-input' />
-                            <input type="text" className='form-control base-input' />
-                            <input type="text" className='form-control base-input' />
+                <form>
+                    <div className='row product-card-inputs-container'>
+                        <div className='col-lg-6 product-card-inputs-left-container'>
+                            <div className='margin-botton-30'>
+                                <input
+                                    type='text'
+                                    className='form-control base-input'
+                                />
+                            </div>
+                            <div className='margin-botton-30'>
+                                <input
+                                    type='text'
+                                    className='form-control base-input'
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    className='form-control base-input'
+                                />
+                            </div>
                         </div>
-                        <div className="col-lg-6">
-                            <textarea
-                                name=""
-                                className='form-control base-input'
-                                rows={10}
-                            />
+                        <div className='col-lg-6'>
+                            <div>
+                                <textarea
+                                    name=''
+                                    className='form-control base-input h-auto'
+                                    rows={10}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <button className='btn btn-outline-danger'>CANCELAR</button>
-                        <button className='btn btn-primary'>SALVAR</button>
+                    <div className="product-crud-buttons-container">
+                        <button
+                            type='button'
+                            className='btn btn-outline-danger product-crud-button'
+                        >
+                            CANCELAR
+                        </button>
+                        <button
+                            type='submit'
+                            className='btn btn-primary product-crud-button text-white'
+                        >
+                            SALVAR
+                        </button>
                     </div>
                 </form>
             </div>
