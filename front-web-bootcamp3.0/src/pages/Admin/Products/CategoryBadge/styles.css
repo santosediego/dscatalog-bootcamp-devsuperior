@@ -1,0 +1,14 @@
+.category-bad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+    padding: 7px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #424242;
+    background-color: #C4C4C4;
+    border-radius: 10px;
+}

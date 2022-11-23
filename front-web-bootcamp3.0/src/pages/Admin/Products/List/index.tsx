@@ -1,7 +1,7 @@
 import React from 'react';
-import ProductCrudCard from 'components/ProductCrudCard';
-import './styles.css';
 import { Link } from 'react-router-dom';
+import ProductCrudCard from 'pages/Admin/Products/ProductCrudCard';
+import './styles.css';
 
 const List = () => {
 
@@ -14,8 +14,12 @@ const List = () => {
         "date": "2020-07-13T20:50:07.123450Z",
         "categories": [
             {
+                "id": 1,
+                "name": "Livros"
+            },
+            {
                 "id": 2,
-                "name": "Eletrônicos"
+                "name": "Fantasia"
             }
         ]
     }
