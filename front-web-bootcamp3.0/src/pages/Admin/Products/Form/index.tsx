@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Product } from 'types/product';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import { useHistory, useParams } from 'react-router-dom';
+import Select from 'react-select';
+import { Category } from 'types/category';
 import './styles.css';
 
 type UrlParams = {
@@ -19,21 +21,30 @@ const Form = () => {
 
     const history = useHistory();
 
+    const [selectCategories, setSelectCategories] = useState<Category[]>([]);
+
     useEffect(() => {
-        if(isEditing){
-            requestBackend({url:`/products/${productId}`})
-            .then((response) => {
+        if (isEditing) {
+            requestBackend({ url: `/products/${productId}` })
+                .then((response) => {
 
-                const product = response.data as Product;
+                    const product = response.data as Product;
 
-                setValue('name', product.name);
-                setValue('price', product.price);
-                setValue('description', product.description);
-                setValue('imgUrl', product.imgUrl);
-                setValue('categories', product.categories);
-            });
+                    setValue('name', product.name);
+                    setValue('price', product.price);
+                    setValue('description', product.description);
+                    setValue('imgUrl', product.imgUrl);
+                    setValue('categories', product.categories);
+                });
         }
     }, [isEditing, productId, setValue]);
+
+    useEffect(() => {
+        requestBackend({url: `/categories`})
+        .then(response => {
+            setSelectCategories(response.data.content);
+        })
+    }, [])
 
     const onSubmit = (formData: Product) => {
 
@@ -84,6 +95,23 @@ const Form = () => {
                                     {errors.name?.message}
                                 </div>
                             </div>
+
+                            <div className='margin-botton-30'>
+                                <Select
+                                    options={selectCategories}
+                                    classNamePrefix="product-crud-select"
+                                    isMulti
+                                    getOptionLabel={(categoy: Category) => categoy.name}
+                                    getOptionValue={(categoy: Category) => String(categoy.id)}
+                                    placeholder={"Categorias"}
+                                />
+                            </div>
+
+
+
+
+
+
                             <div className='margin-botton-30'>
                                 <input
                                     {...register("price", {
@@ -99,13 +127,8 @@ const Form = () => {
                                     {errors.price?.message}
                                 </div>
                             </div>
-                            {/* <div>
-                                <input
-                                    type='text'
-                                    className='form-control base-input'
-                                />
-                            </div> */}
                         </div>
+
                         <div className='col-lg-6'>
                             <div>
                                 <textarea
