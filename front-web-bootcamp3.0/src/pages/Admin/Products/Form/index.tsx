@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Product } from 'types/product';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
@@ -17,7 +17,7 @@ const Form = () => {
     const { productId } = useParams<UrlParams>();
     const isEditing = productId !== 'create';
 
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<Product>();
+    const { register, handleSubmit, formState: { errors }, setValue, control } = useForm<Product>();
 
     const history = useHistory();
 
@@ -40,17 +40,16 @@ const Form = () => {
     }, [isEditing, productId, setValue]);
 
     useEffect(() => {
-        requestBackend({url: `/categories`})
-        .then(response => {
-            setSelectCategories(response.data.content);
-        })
+        requestBackend({ url: `/categories` })
+            .then(response => {
+                setSelectCategories(response.data.content);
+            })
     }, [])
 
     const onSubmit = (formData: Product) => {
 
         const data = {
             ...formData,
-            categories: isEditing ? formData.categories : [{ id: 1, name: "" }],
             imgUrl: isEditing ? formData.imgUrl : "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/22-big.jpg"
         }
 
@@ -97,20 +96,27 @@ const Form = () => {
                             </div>
 
                             <div className='margin-botton-30'>
-                                <Select
-                                    options={selectCategories}
-                                    classNamePrefix="product-crud-select"
-                                    isMulti
-                                    getOptionLabel={(categoy: Category) => categoy.name}
-                                    getOptionValue={(categoy: Category) => String(categoy.id)}
-                                    placeholder={"Categorias"}
+                                <Controller
+                                    name='categories'
+                                    rules={{ required: true }}
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select {...field}
+                                            options={selectCategories}
+                                            classNamePrefix="product-crud-select"
+                                            isMulti
+                                            getOptionLabel={(categoy: Category) => categoy.name}
+                                            getOptionValue={(categoy: Category) => String(categoy.id)}
+                                            placeholder={"Categorias"}
+                                        />
+                                    )}
                                 />
+                                {errors.categories && (
+                                    <div className="invalid-feedback d-block">
+                                        Campo obrigatório!
+                                    </div>
+                                )}
                             </div>
-
-
-
-
-
 
                             <div className='margin-botton-30'>
                                 <input
