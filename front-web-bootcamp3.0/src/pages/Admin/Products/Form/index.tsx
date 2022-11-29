@@ -29,14 +29,14 @@ const Form = () => {
 
         requestBackend(config)
             .then((response) => {
-                console.log(response.data);
+                handleBack();
             })
             .catch(error => {
                 console.log(error)
             });
     };
 
-    const handleCancel = () => {
+    const handleBack = () => {
         history.push('/admin/products');
     }
 
@@ -103,7 +103,7 @@ const Form = () => {
                     <div className="product-crud-buttons-container">
                         <button
                             className='btn btn-outline-danger product-crud-button'
-                            onClick={handleCancel}
+                            onClick={handleBack}
                         >
                             CANCELAR
                         </button>

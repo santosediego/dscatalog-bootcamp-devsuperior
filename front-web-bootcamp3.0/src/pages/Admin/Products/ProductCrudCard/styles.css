@@ -39,6 +39,10 @@
     margin-right: 10px;
 }
 
+.product-crud-card-link {
+    width: 100%;
+}
+
 .product-crud-card-button {
     width: 100%;
     height: 40px;
