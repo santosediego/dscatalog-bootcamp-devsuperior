@@ -6,14 +6,17 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 import { ReactComponent as SearchIcon } from 'assets/images/search-icon.svg';
-import { DefaultDeserializer } from 'v8';
 
-type ProductFilterData = {
+export type ProductFilterData = {
     name: string,
     category: Category | null,
 }
 
-const ProductFilter = () => {
+type Props = {
+    onSubmitFilter: (data: ProductFilterData) => void;
+}
+
+const ProductFilter = ({ onSubmitFilter }: Props) => {
 
     const { register, handleSubmit, setValue, getValues, control } = useForm<ProductFilterData>();
 
@@ -27,12 +30,12 @@ const ProductFilter = () => {
     const handleChangeCategory = (value: Category) => {
         setValue("category", value);
 
-        const obj : ProductFilterData = {
+        const obj: ProductFilterData = {
             name: getValues('name'),
             category: getValues('category'),
         }
 
-        console.log('Enviou: ', obj);
+        onSubmitFilter(obj);
     };
 
     useEffect(() => {
@@ -43,7 +46,7 @@ const ProductFilter = () => {
     }, [])
 
     const onSubmit = (formData: ProductFilterData) => {
-        console.log('Enviou: ', formData);
+        onSubmitFilter(formData);
     };
 
     return (
