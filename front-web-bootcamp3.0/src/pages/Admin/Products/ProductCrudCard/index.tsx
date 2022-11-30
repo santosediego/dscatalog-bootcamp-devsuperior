@@ -5,6 +5,7 @@ import CategoryBadge from '../CategoryBadge';
 import { Link } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 type Props = {
@@ -28,7 +29,11 @@ const ProductCrudCard = ({ product, onDelete }: Props) => {
 
         requestBackend(config)
             .then(() => {
+                toast.info('Registro excluído com sucesso.')
                 onDelete();
+            })
+            .catch(()=> {
+                toast.error('Erro ao deletar o registro.')
             })
     }
 

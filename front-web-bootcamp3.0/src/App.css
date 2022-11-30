@@ -38,6 +38,10 @@ input {
     background-color: unset !important;
 }
 
+textarea {
+    background-color: unset !important;
+}
+
 .base-input::placeholder {
     color: #9E9E9E;
 }

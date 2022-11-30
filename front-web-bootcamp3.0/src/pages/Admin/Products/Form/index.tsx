@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { Category } from 'types/category';
 import CurrencyInput from 'react-currency-input-field';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 type UrlParams = {
@@ -63,10 +64,11 @@ const Form = () => {
 
         requestBackend(config)
             .then((response) => {
+                toast.info('Registro salvo com sucesso.');
                 handleBack();
             })
             .catch(error => {
-                console.log(error)
+                toast.error('Erro ao salvar o registro.');
             });
     };
 
@@ -84,7 +86,8 @@ const Form = () => {
                             <div className='margin-botton-30'>
                                 <input
                                     {...register("name", {
-                                        required: { value: true, message: "Campo obrigatório!" }
+                                        required: { value: true, message: "Campo obrigatório!"},
+                                        minLength: {value: 5, message: 'Entre 5 a 60 caracteres'}
                                     })}
                                     type="text"
                                     className={`form-control base-input ${errors.name ? 'is-invalid' : ''}`}
