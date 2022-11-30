@@ -6,6 +6,7 @@ import { Product } from 'types/product';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import Pagination from 'components/Pagination';
+import ProductFilter from 'components/ProductFilter';
 import './styles.css';
 
 type ControlComponentsData = {
@@ -50,7 +51,7 @@ const List = () => {
                 <Link to='/admin/products/create'>
                     <button className='btn btn-primary text-white btn-crud-add'>ADICIONAR</button>
                 </Link>
-                <div className='base-card product-filter-container'>Search bar</div>
+                <ProductFilter />
             </div>
             <div className="row">
                 {page?.content.map(product => (
