@@ -6,17 +6,34 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 import { ReactComponent as SearchIcon } from 'assets/images/search-icon.svg';
+import { DefaultDeserializer } from 'v8';
 
 type ProductFilterData = {
     name: string,
-    category: Category,
+    category: Category | null,
 }
 
 const ProductFilter = () => {
 
-    const { register, handleSubmit, control } = useForm<ProductFilterData>();
+    const { register, handleSubmit, setValue, getValues, control } = useForm<ProductFilterData>();
 
     const [selectCategories, setSelectCategories] = useState<Category[]>([]);
+
+    const handleFormClear = () => {
+        setValue('name', '');
+        setValue('category', null);
+    };
+
+    const handleChangeCategory = (value: Category) => {
+        setValue("category", value);
+
+        const obj : ProductFilterData = {
+            name: getValues('name'),
+            category: getValues('category'),
+        }
+
+        console.log('Enviou: ', obj);
+    };
 
     useEffect(() => {
         requestBackend({ url: `/categories` })
@@ -53,6 +70,7 @@ const ProductFilter = () => {
                                 <Select {...field}
                                     options={selectCategories}
                                     isClearable
+                                    onChange={value => handleChangeCategory(value as Category)}
                                     getOptionLabel={(categoy: Category) => categoy.name}
                                     getOptionValue={(categoy: Category) => String(categoy.id)}
                                     placeholder={'Categoria'}
@@ -61,7 +79,10 @@ const ProductFilter = () => {
                             )}
                         />
                     </div>
-                    <button className='btn btn-outline-secondary product-filter-btn-clear' >
+                    <button
+                        onClick={handleFormClear}
+                        className='btn btn-outline-secondary product-filter-btn-clear'
+                    >
                         LIMPAR <span className='btn-product-filter-word'>FILTRO</span>
                     </button>
                 </div>
