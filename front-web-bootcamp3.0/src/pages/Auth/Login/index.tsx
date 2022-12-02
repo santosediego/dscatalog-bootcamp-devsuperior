@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { requestBackendLogin } from 'util/requests';
 import { AuthContext } from 'AuthContext';
 import { saveAuthData } from 'util/storage';
-import { getTokenData } from 'util/auth';
+import { getTokenData } from 'util/token';
 import './styles.css';
 
 type CredentialsDTO = {

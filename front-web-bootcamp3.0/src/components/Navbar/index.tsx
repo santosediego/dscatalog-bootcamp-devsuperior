@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import history from 'util/history';
 import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { isAuthenticated } from 'util/auth';
 import { removeAuthData } from 'util/storage';
+import { getTokenData } from 'util/token';
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
 
