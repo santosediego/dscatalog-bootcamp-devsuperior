@@ -80,7 +80,7 @@ const Form = () => {
         <div className='product-crud-bar-container'>
             <div className='base-card product-card-form-card'>
                 <h1 className='product-card-form-card-title'>Dados do produto</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} data-testid='form'>
                     <div className='row product-card-inputs-container'>
                         <div className='col-lg-6 product-card-inputs-left-container'>
                             <div className='margin-botton-30'>
