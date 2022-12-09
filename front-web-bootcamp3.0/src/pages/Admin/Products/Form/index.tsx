@@ -93,6 +93,7 @@ const Form = () => {
                                     className={`form-control base-input ${errors.name ? 'is-invalid' : ''}`}
                                     placeholder="Nome do produto"
                                     name="name"
+                                    data-testid='name'
                                 />
                                 <div className="invalid-feedback d-block">
                                     {errors.name?.message}
@@ -100,6 +101,7 @@ const Form = () => {
                             </div>
 
                             <div className='margin-botton-30'>
+                                <label htmlFor="categories" className='d-none'>Categorias</label>
                                 <Controller
                                     name='categories'
                                     rules={{ required: true }}
@@ -112,6 +114,7 @@ const Form = () => {
                                             getOptionLabel={(categoy: Category) => categoy.name}
                                             getOptionValue={(categoy: Category) => String(categoy.id)}
                                             placeholder={"Categorias"}
+                                            inputId='categories'
                                         />
                                     )}
                                 />
@@ -134,6 +137,7 @@ const Form = () => {
                                             disableGroupSeparators={true}
                                             value={field.value}
                                             onValueChange={field.onChange}
+                                            data-testid='price'
                                         />
                                     )}
                                 />
@@ -155,6 +159,7 @@ const Form = () => {
                                     className={`form-control base-input ${errors.imgUrl ? 'is-invalid' : ''}`}
                                     placeholder="URL da imagem"
                                     name="imgUrl"
+                                    data-testid='imgUrl'
                                 />
                                 <div className="invalid-feedback d-block">
                                     {errors.imgUrl?.message}
@@ -172,6 +177,7 @@ const Form = () => {
                                     placeholder="Descrição"
                                     name="description"
                                     rows={10}
+                                    data-testid='description'
                                 />
                                 <div className="invalid-feedback d-block">
                                     {errors.description?.message}
